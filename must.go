@@ -4,6 +4,11 @@ import (
 	"strconv"
 )
 
+//GetBA returns the first argument as a byte array
+func GetBA(a ...interface{}) []byte {
+	return a[0].([]byte)
+}
+
 //GetF32 returns the first argument as a float32
 func GetF32(a ...interface{}) float32 {
 	return a[0].(float32)
@@ -29,36 +34,41 @@ func GetS(a ...interface{}) string {
 	return a[0].(string)
 }
 
-//F32 returns a float32 representation of the argument or panics
+//F32 returns a float32 representation of the argument
 func F32(a interface{}) float32 {
-	f, err := strconv.ParseFloat(a, 32)
+	f, err := strconv.ParseFloat(a.(string), 32)
 
-	if err != nill {
+	if err != nil {
 		panic(err)
 	}
 
-	return f
+	return float32(f)
 }
 
-//F64 returns a float64 representation of the argument or panics
+//F64 returns a float64 representation of the argument
 func F64(a interface{}) float64 {
-	f, err := strconv.ParseFloat(a, 64)
+	f, err := strconv.ParseFloat(a.(string), 64)
 
-	if err != nill {
+	if err != nil {
 		panic(err)
 	}
 
 	return f
 }
 
-//F returns a float64 representation of the argument or panics
+//BA returns a byte array representation of the argument
+func BA(a interface{}) []byte {
+	return []byte(a.(string))
+}
+
+//F returns a float64 representation of the argument
 func F(a interface{}) float64 {
 	return F64(a)
 }
 
-//I returns an int representation of the argument or panics
+//I returns an int representation of the argument
 func I(a interface{}) int {
-	i, err := strconv.Atoi(a)
+	i, err := strconv.Atoi(a.(string))
 
 	if err != nil {
 		panic(err)
